@@ -18,14 +18,23 @@ internal class MultiTreeInstance : IDisposable
         };
         _multiMeshInstance = new(world, _multiMesh);
     }
-    public void SetPositions(IEnumerable<Vector3> positions)
+    public void SetPositions(List<Vector3> positions)
     {
-        int pointCount = positions.Count();
-
+        int pointCount = positions.Count;
+        _multiMesh.InstanceCount = pointCount;
+        for(int i = 0; i < pointCount; ++i)
+        {
+            Transform3D transform = new(Basis.Identity, positions[i]);
+            _multiMesh.SetInstanceTransform(i, transform);  
+        }
+    }
+    public void SetMaterial(Material material)
+    {
+        _multiMeshInstance.MaterialOverride = material; 
     }
 
-    void IDisposable.Dispose()
+    public void Dispose()
     {
-        throw new NotImplementedException();
+        _multiMeshInstance.Dispose();
     }
 }

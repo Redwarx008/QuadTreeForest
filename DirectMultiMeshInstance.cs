@@ -78,7 +78,7 @@ internal class DirectMultiMeshInstance : IDisposable
         RenderingServer.InstanceSetBase(_instanceRid, _multiMesh.GetRid());
     }
 
-    void IDisposable.Dispose()
+    public void Dispose()
     {
         RenderingServer.FreeRid(_instanceRid);
     }
