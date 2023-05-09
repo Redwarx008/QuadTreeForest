@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "3vRxbeGdW+Mvu4qMRauMvH2VrPc1bbh8SRkibLakoZBIpMxTDJwX9UWDKKvTxiMCzqwxUvHETRATJLz91sAE6g==",
+  "success": true,
+  "projectFilePath": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hongliang_jia\\.nuget\\packages\\godot.sourcegenerators\\4.0.2\\godot.sourcegenerators.4.0.2.nupkg.sha512",
+    "C:\\Users\\hongliang_jia\\.nuget\\packages\\godotsharp\\4.0.2\\godotsharp.4.0.2.nupkg.sha512",
+    "C:\\Users\\hongliang_jia\\.nuget\\packages\\godotsharpeditor\\4.0.2\\godotsharpeditor.4.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

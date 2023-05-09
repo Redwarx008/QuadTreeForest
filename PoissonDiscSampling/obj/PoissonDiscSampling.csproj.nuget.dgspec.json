@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj": {}
+  },
+  "projects": {
+    "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
+        "projectName": "PoissonDiscSampling",
+        "projectPath": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
+        "packagesPath": "C:\\Users\\hongliang_jia\\.nuget\\packages\\",
+        "outputPath": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Users\\hongliang_jia\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\hongliang_jia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hongliang_jia\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "E:\\LocalNugetSource": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Godot.SourceGenerators": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "GodotSharp": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
+            "GodotSharpEditor": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

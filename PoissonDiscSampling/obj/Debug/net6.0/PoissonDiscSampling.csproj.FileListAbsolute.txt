@@ -1,0 +1,12 @@
+E:\TestProjects\Forest\PoissonDiscSampling\bin\Debug\net6.0\PoissonDiscSampling.deps.json
+E:\TestProjects\Forest\PoissonDiscSampling\bin\Debug\net6.0\PoissonDiscSampling.dll
+E:\TestProjects\Forest\PoissonDiscSampling\bin\Debug\net6.0\PoissonDiscSampling.pdb
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.csproj.AssemblyReference.cache
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.GeneratedMSBuildEditorConfig.editorconfig
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.AssemblyInfoInputs.cache
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.AssemblyInfo.cs
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.csproj.CoreCompileInputs.cache
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.dll
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\refint\PoissonDiscSampling.dll
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\PoissonDiscSampling.pdb
+E:\TestProjects\Forest\PoissonDiscSampling\obj\Debug\net6.0\ref\PoissonDiscSampling.dll
