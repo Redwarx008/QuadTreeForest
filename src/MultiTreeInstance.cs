@@ -7,14 +7,27 @@ using System.Threading.Tasks;
 
 internal class MultiTreeInstance : IDisposable
 {
+    public bool Visiable
+    {
+        get => _visiable;
+        set
+        {
+            _visiable = value;
+            _multiMeshInstance.Visible = value;
+        }
+    }
+    private bool _visiable = false;
+
     private DirectMultiMeshInstance _multiMeshInstance;
 
     private MultiMesh _multiMesh;
+
     public MultiTreeInstance(World3D world, Mesh treeMesh)
     {
         _multiMesh = new MultiMesh()
         {
-            Mesh = treeMesh
+            Mesh = treeMesh,
+            TransformFormat = MultiMesh.TransformFormatEnum.Transform3D
         };
         _multiMeshInstance = new(world, _multiMesh);
     }

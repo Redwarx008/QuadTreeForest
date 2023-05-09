@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2ot4k5nkmoen"]
+
+[ext_resource type="Script" path="res://src/Main.cs" id="1_5b7wo"]
+[ext_resource type="Script" path="res://src/Camera.cs" id="2_4yk0x"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_5b7wo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("2_4yk0x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

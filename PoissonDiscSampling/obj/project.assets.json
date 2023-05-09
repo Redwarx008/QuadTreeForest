@@ -88,24 +88,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hongliang_jia\\.nuget\\packages\\": {},
-    "C:\\Users\\hongliang_jia\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
+    "C:\\Users\\Redwa\\.nuget\\packages\\": {},
+    "C:\\Users\\Redwa\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
+      "projectUniqueName": "E:\\TestProjects\\QuadTreeForest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
       "projectName": "PoissonDiscSampling",
-      "projectPath": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
-      "packagesPath": "C:\\Users\\hongliang_jia\\.nuget\\packages\\",
-      "outputPath": "E:\\TestProjects\\Forest\\PoissonDiscSampling\\obj\\",
+      "projectPath": "E:\\TestProjects\\QuadTreeForest\\PoissonDiscSampling\\PoissonDiscSampling.csproj",
+      "packagesPath": "C:\\Users\\Redwa\\.nuget\\packages\\",
+      "outputPath": "E:\\TestProjects\\QuadTreeForest\\PoissonDiscSampling\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Users\\hongliang_jia\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        "C:\\Users\\Redwa\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\hongliang_jia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Users\\hongliang_jia\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
+        "C:\\Users\\Redwa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Redwa\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -113,7 +113,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "E:\\LocalNugetSource": {},
+        "C:\\Users\\Redwa\\.nuget\\LocalNugetSource": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -161,7 +161,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
