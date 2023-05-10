@@ -34,13 +34,13 @@ public partial class Main : Node3D
 
 		Stopwatch stopwatch = Stopwatch.StartNew();
 
-		Dictionary<ForestType, List<Vector2>> treePos2D = new();
+		Dictionary<ForestType, Vector2[]> treePos2D = new();
         var forestTypes = Enum.GetValues(typeof(ForestType));
         foreach (ForestType type in forestTypes)
         {
 			Stopwatch stopwatch1 = Stopwatch.StartNew();
 
-            List<Vector2> generatedPos = PoissonDiscSamplingHelper.GeneratePointsParallel(2,
+            Vector2[] generatedPos = PoissonDiscSamplingHelper.GeneratePointsParallel(2,
                 new Rect2I(0, 0, _mapWidth, _mapHeight), mask: _forestMaskDic[type]);
             treePos2D[type] = generatedPos;
 

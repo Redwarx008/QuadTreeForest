@@ -67,37 +67,51 @@ namespace PoissonDiscSampling
             return points;
         }
 
-        public static List<Vector2> GeneratePointsParallel(float radius, Rect2I region, int attemptNum = 30, Image mask = null)
+        public static Vector2[] GeneratePointsParallel(float radius, Rect2I region, int attemptNum = 30, Image mask = null)
         {
-            ConcurrentBag<List<Vector2>> pointLists = new();
-
-            List<Rect2I> regions = new();
-
             int regionXEnd = region.Position.X + region.Size.X;
             int regionYEnd = region.Position.Y + region.Size.Y;
 
-            int blockXCount = 0;
-            int blockYCount = 0;
-            for (int y = region.Position.Y; y < regionYEnd; y += BlockSize, ++blockYCount)
+            int blockXCount = (int)MathF.Ceiling((float)region.Size.X / BlockSize);
+            int blockYCount = (int)MathF.Ceiling((float)region.Size.Y / BlockSize);
+
+            Rect2I[] regions = new Rect2I[blockXCount * blockYCount];
+
+            int count = 0;
+            for (int y = region.Position.Y; y < regionYEnd; y += BlockSize)
             {
-                for (int x = region.Position.X; x < regionXEnd; x += BlockSize, ++blockXCount)
+                for (int x = region.Position.X; x < regionXEnd; x += BlockSize)
                 {
                     int subRegionWidth = Math.Min(BlockSize, regionXEnd - x);
                     int subRegionHeight = Math.Min(BlockSize, regionYEnd - y);
                     Rect2I subRegion = new(x, y, subRegionWidth, subRegionHeight);
-                    regions.Add(subRegion);
+                    regions[count] = subRegion;
+                    ++count;
                 }
             }
 
-            Parallel.For(0, regions.Count, i =>
+            List<Vector2>[] pointLists = new List<Vector2>[blockXCount * blockYCount];
+
+            Parallel.For(0, regions.Length, i =>
             {
                 List<Vector2> subPoints = GeneratePointsParallelPartial(radius, i, blockXCount, blockYCount, regions[i], attemptNum, mask);
-                pointLists.Add(subPoints);
+                pointLists[i] = subPoints;
             });
-            List<Vector2> points = new();
+
+            int pointCount = 0;
+            foreach(var list in pointLists)
+            {
+                pointCount += list.Count;
+            }
+
+            Vector2[] points = new Vector2[pointCount];
+            count = 0;
             foreach (var list in pointLists)
             {
-                points.AddRange(list);
+                for(int i = 0; i < list.Count; ++i)
+                {
+                    points[count++] = list[i];
+                }
             }
             return points;
         }

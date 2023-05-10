@@ -19,7 +19,7 @@ internal class ForestQuadTree : IDisposable
 
         public Dictionary<ForestType, Mesh> TreeMesh { get; private set; }
 
-        public Dictionary<ForestType, List<Vector2>> TreePositions { get; private set; }
+        public Dictionary<ForestType, Vector2[]> TreePositions { get; private set; }
 
         public float ViewDistance { get; set; } = 3000;
 
@@ -30,8 +30,8 @@ internal class ForestQuadTree : IDisposable
         public World3D World { get; private set; }
 
         public CreateDesc(Dictionary<ForestType, Image> forestMask,
-            Dictionary<ForestType, Mesh> treeMesh, Dictionary<ForestType, 
-                List<Vector2>> treePositions, World3D world, int mapWidth, int mapHeight)
+            Dictionary<ForestType, Mesh> treeMesh, Dictionary<ForestType,
+                Vector2[]> treePositions, World3D world, int mapWidth, int mapHeight)
         {
             ForestMask = forestMask;
             TreeMesh = treeMesh;
@@ -61,6 +61,7 @@ internal class ForestQuadTree : IDisposable
             set
             {
                 Debug.Assert(_treeInstances != null);
+
                 _visiable = value;
                 foreach(var forest in _treeInstances)
                 {
@@ -173,9 +174,10 @@ internal class ForestQuadTree : IDisposable
 
     private static Dictionary<ForestType, Image> _mask = null!;
 
-    private static float _viewDistance = 1000;
+    private static float _viewDistance;
     public ForestQuadTree(in CreateDesc createDesc)
     {
+        _viewDistance = createDesc.ViewDistance;
         _mask = createDesc.ForestMask;
 
         int mapWidth = createDesc.Width;
@@ -204,15 +206,15 @@ internal class ForestQuadTree : IDisposable
         foreach (var forestPosPair in createDesc.TreePositions)
         {
             Dictionary<Vector2I, List<Vector3>> positionsPerChunk = new();
-            List<Vector2> treePos2D = forestPosPair.Value;
-            for(int i = 0; i < treePos2D.Count; ++i)
+            var treePos2D = forestPosPair.Value;
+            for(int i = 0; i < treePos2D.Length; ++i)
             {
                 Vector2 p2D = treePos2D[i];
                 Vector3 p3D = new(p2D.X, 0, p2D.Y);
 
                 int chunkPosX = (int)p2D.X / ChunkSize;
                 int chunkPosY = (int)p2D.Y / ChunkSize;
-                Vector2I chunkPos = new Vector2I(chunkPosX, chunkPosY);
+                Vector2I chunkPos = new(chunkPosX, chunkPosY);
                 if (!positionsPerChunk.ContainsKey(chunkPos))
                 {
                     positionsPerChunk[chunkPos] = new();
@@ -224,6 +226,7 @@ internal class ForestQuadTree : IDisposable
             {
                 _bottomNodes[chunkPosPair.Key.X, chunkPosPair.Key.Y].SetTreesPositions(
                     forestPosPair.Key, chunkPosPair.Value);
+                _bottomNodes[chunkPosPair.Key.X, chunkPosPair.Key.Y].Visiable = false;
             }
         }
     }
