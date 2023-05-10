@@ -19,20 +19,26 @@ internal class ForestQuadTree : IDisposable
 
         public Dictionary<ForestType, Mesh> TreeMesh { get; private set; }
 
-        public float ViewDistance { get; private set; } = 3000;
+        public Dictionary<ForestType, List<Vector2>> TreePositions { get; private set; }
 
-        public int Width { get; private set; } = 2048;
+        public float ViewDistance { get; set; } = 3000;
 
-        public int Height { get; private set; } = 2048;
+        public int Width { get; private set; }
+
+        public int Height { get; private set; }
 
         public World3D World { get; private set; }
 
         public CreateDesc(Dictionary<ForestType, Image> forestMask,
-            Dictionary<ForestType, Mesh> treeMesh, World3D world)
+            Dictionary<ForestType, Mesh> treeMesh, Dictionary<ForestType, 
+                List<Vector2>> treePositions, World3D world, int mapWidth, int mapHeight)
         {
             ForestMask = forestMask;
             TreeMesh = treeMesh;
+            TreePositions = treePositions;
             World = world;
+            Width = mapWidth;
+            Height = mapHeight;
         }
     }
     public class Node
@@ -64,12 +70,8 @@ internal class ForestQuadTree : IDisposable
         }
         private bool _visiable = false;
 
-        private Dictionary<ForestType, Rect2>? _forestRegion = null;
-
-        private Dictionary<ForestType, List<Vector2>>? _treePositions = null;
-
-        private Dictionary<ForestType, MultiTreeInstance>? _treeInstances = null;
-
+        // Only leaf nodes have it.
+        private Dictionary<ForestType, MultiTreeInstance>? _treeInstances;
         public Node(in CreateDesc createDesc, int x, int y, int size, in Node[,] bottomNodes)
         {
             X = (short)x;
@@ -82,33 +84,11 @@ internal class ForestQuadTree : IDisposable
             if (Size == ChunkSize)
             {
                 // todo: assign a value to MinHeight and MaxHeight.
-
-                _forestRegion = new();
-                _treePositions = new();
                 _treeInstances = new();
 
                 foreach (var forestMask in _mask)
                 {
-                    List<Vector2> points = PoissonDiscSamplingHelper.GeneratePointsParallel(2,
-                        new Rect2I(X, Y, Size, Size), mask: forestMask.Value);
-
-                    float xMin = float.MaxValue;
-                    float xMax = float.MinValue;
-                    float yMin = float.MaxValue;
-                    float yMax = float.MinValue;
-
-                    List<Vector3> points3D = new(points.Count);
-                    for (int i = 0; i < points.Count; i++)
-                    {
-                        var p = points[i];
-                        xMin = MathF.Min(p.X, xMin);
-                        xMax = MathF.Max(p.X, xMax);
-                        yMin = MathF.Min(p.Y, yMin);
-                        yMax = MathF.Max(p.Y, yMax);
-                        points3D.Add(new Vector3(p.X, 0, p.Y));
-                    }
                     MultiTreeInstance treeInstance = new(createDesc.World, createDesc.TreeMesh[forestMask.Key]);
-                    treeInstance.SetPositions(points3D);
                     _treeInstances[forestMask.Key] = treeInstance;
                 }
 
@@ -172,6 +152,11 @@ internal class ForestQuadTree : IDisposable
                 }
             }
         }
+        public void SetTreesPositions(ForestType type, List<Vector3> treesPos)
+        {
+            Debug.Assert(_treeInstances != null);
+            _treeInstances[type].SetPositions(treesPos);
+        }
         public void FreeMeshInstance()
         {
             Debug.Assert(_treeInstances != null);
@@ -185,8 +170,6 @@ internal class ForestQuadTree : IDisposable
     private Node[,] _bottomNodes;
 
     private Node[,] _topNodes;
-
-    private static Dictionary<ForestType, List<Vector3>> treePositions = null!;
 
     private static Dictionary<ForestType, Image> _mask = null!;
 
@@ -214,6 +197,33 @@ internal class ForestQuadTree : IDisposable
             for (int x = 0; x < topNodeCountX; ++x)
             {
                 _topNodes[x, y] = new Node(createDesc, x * topNodeSize, y * topNodeSize, topNodeSize, _bottomNodes);
+            }
+        }
+
+        // Assign the position of each tree to each chunk
+        foreach (var forestPosPair in createDesc.TreePositions)
+        {
+            Dictionary<Vector2I, List<Vector3>> positionsPerChunk = new();
+            List<Vector2> treePos2D = forestPosPair.Value;
+            for(int i = 0; i < treePos2D.Count; ++i)
+            {
+                Vector2 p2D = treePos2D[i];
+                Vector3 p3D = new(p2D.X, 0, p2D.Y);
+
+                int chunkPosX = (int)p2D.X / ChunkSize;
+                int chunkPosY = (int)p2D.Y / ChunkSize;
+                Vector2I chunkPos = new Vector2I(chunkPosX, chunkPosY);
+                if (!positionsPerChunk.ContainsKey(chunkPos))
+                {
+                    positionsPerChunk[chunkPos] = new();
+                }
+                positionsPerChunk[chunkPos].Add(p3D);
+            }
+
+            foreach(var chunkPosPair in positionsPerChunk)
+            {
+                _bottomNodes[chunkPosPair.Key.X, chunkPosPair.Key.Y].SetTreesPositions(
+                    forestPosPair.Key, chunkPosPair.Value);
             }
         }
     }
