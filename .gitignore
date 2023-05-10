@@ -1,3 +1,14 @@
 # Godot 4+ specific ignores
 .godot/
+
 .vs/
+
+*.obj
+*.pdb
+*.pch
+*.log
+*.cache
+obj/
+[Rr]elease*/
+[Bb]in/
+[Dd]ebug*/
